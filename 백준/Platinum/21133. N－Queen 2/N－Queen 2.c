@@ -1,49 +1,39 @@
 #include <stdio.h>
 
-int count = 0;
-
-void check(int *tmp, int n)
-{
-	if(n % 6 != 2 && n % 6 != 3)
-	{
-		for(int i=1; i<=n/2; i++) 
-			tmp[count++] = 2 * i - 1;
- 		if(n%2 ==1)
-			tmp[count++]  = n;
- 		for(int i=1; i<=n/2; i++) 
-			tmp[count++] = 2 * i;
-	}
-	else if (n % 6 == 2)
-	{
-		for(int i=1; i<=n/2; i++) 
-			tmp[count++] = 2 * i;
- 		tmp[count++] = 3;
-		tmp[count++] = 1;
- 		for(int i=n / 2 + 2; i < n - 1; i++) 
-			tmp[count++] = 2*(i-n/2 +1)+1;
-		tmp[count++] = 5;
-	}
-	else if(n % 6 == 3)
-	{
-		for(int i=2; i <= n / 2; i++) 
-			tmp[count++] = 2 * i;
- 		tmp[count++] = 2;
- 		for(int i = n / 2; i< n - 2; i++) 
-			tmp[count++] = (i- n/2 + 2)*2+1;
-		tmp[count++] = 1;
-		tmp[count++] = 3;
-	}
-	
+void placeQueens(int n) {
+    if (n % 6 != 2 && n % 6 != 3) {
+        for (int i = 2; i <= n; i += 2) {
+            printf("%d\n", i);
+        }
+        for (int i = 1; i <= n; i += 2) {
+            printf("%d\n", i);
+        }
+    } else {
+        for (int i = 2; i <= n; i += 2) {
+            if (n % 6 == 3 && i == 2) continue;
+            printf("%d\n", i);
+        }
+        if (n % 6 == 2) {
+            printf("3\n1\n");
+            for (int i = 7; i <= n; i += 2) {
+                printf("%d\n", i);
+            }
+            printf("5\n");
+        } else {
+            for (int i = 5; i <= n; i += 2) {
+                printf("%d\n", i);
+            }
+            printf("1\n3\n");
+        }
+        if (n % 6 == 3) {
+            printf("2\n");
+        }
+    }
 }
 
-int main(void)
-{
-	int i;
-
-	scanf("%d", &i);
-	int tmp[i];
-	check(tmp, i);
-	for(int k = 0; k < i; k++)
-		printf("%d\n", tmp[k]);
-	return 0;
+int main() {
+    int n;
+    scanf("%d", &n);
+    placeQueens(n);
+    return 0;
 }
